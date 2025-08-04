@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './Components/Navbar';
 import Documentation from './Components/Documentation';
 import Problems from './Components/Problems';
@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 
 export default function App() {
+  document.body.style.background = '#fdf2f8';
   return (
     <Router>
       <Navbar />

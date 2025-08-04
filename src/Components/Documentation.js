@@ -1,11 +1,10 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Sidebar from './Sidebar';
 import AlgoDetails from './AlgoDetails';
 import { useParams } from 'react-router-dom';
 
 export default function Documentation() {
     const { algo } = useParams();
-
     return (
         <div className="container-fluid">
             <div className="row">
@@ -14,7 +13,7 @@ export default function Documentation() {
                 </div>
 
                 {/* Main Content */}
-                <div className="col-md-9">
+                <div className="col-md-9" style={{border:'1px solid black'}}>
                     {algo ? (
                         <AlgoDetails algo={algo} />
                     ) : (

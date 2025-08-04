@@ -187,7 +187,7 @@ Then one by one delete the root node of the Max-heap and replace it with the las
                     <pre>{data.pseudocode}</pre>
                 </>
             )}
-            <h5>Complexities</h5>
+            {data.time && data.space && <h5>Complexities</h5>}
             {data.time && <p><strong>Time Complexity:</strong> {data.time}</p>}
             {data.space && <p><strong>Space Complexity:</strong> {data.space}</p>}
         </div>
