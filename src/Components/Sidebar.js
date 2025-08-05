@@ -26,11 +26,13 @@ export default function Sidebar() {
             'Postorder Traversal',
             'Level Order Traversal',
             'Binary Tree',
-            'N-array Tree',
+            'Binary Search Tree',
+            'Full Binary Tree',
             'Perfect Binary Tree',
             'Complete Binary Tree',
-            'Binary Search Tree',
-            'AVL Tree'
+            'N-array Tree',
+            'AVL Tree',
+            'Red Black Tree'
         ],
         'Graph Algorithms': [
             'DFS',
@@ -56,7 +58,7 @@ export default function Sidebar() {
     };
 
     return (
-        <div className="p-3" style={{ minHeight: '100vh', background: '#f8d7e3' }}>
+        <div className="p-3" style={{ minHeight: '100vh',borderRadius: '7px', background: '#f8d7e3' }}>
             <h5 className="mb-3">Algorithms</h5>
             {Object.entries(sections).map(([sectionTitle, algos], index) => {
                 const isSectionHovered = hoveredSection === sectionTitle;

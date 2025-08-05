@@ -1,14 +1,66 @@
 function AlgoDetails({ algo }) {
     // Simulate data (You can move this to a separate file later)
     const content = {
+        'linear-search' : {
+            title: 'Linear Search',
+            description:`
+The linear search algorithm, also known as sequential search, is a fundamental method for locating a specific element within a list or array. It operates by sequentially examining each element of the list, starting from the beginning,until either the target element is found or the entire list has been traversed.
+`,
+            working: `
+1. Initialization: The search begins at the first element of the list (typically at index 0).
+2. Comparison: The current element is compared with the target value being searched for.
+3. Match Found: If the current element matches the target, the search is successful, and the index or position of the found element is returned. The algorithm then terminates.
+4. No Match: If the current element does not match the target, the search proceeds to the next element in the list. 
+5. Iteration: Steps 2-4 are repeated for each subsequent element until either a match is found or the end of the list is reached.
+6. Element Not Found: If the end of the list is reached without finding the target element, the search is unsuccessful, and a special value (e.g., -1 or null) is returned to indicate that the element is not present`,
+            pseudocode: `
+FUNCTION LinearSearch(list, target_value):
+  FOR EACH element IN list:
+    IF element IS EQUAL TO target_value THEN:
+      RETURN the index/position of element
+    END IF
+  END FOR
+  RETURN -1 (indicating target_value not found)
+END FUNCTION`,
+            time: 'O(n) -> Avg.,Worst , O(1) -> Best case',
+            space: 'O(1)'
+        },
+        'binary-search':{
+            title:'Binary Search',
+            description: `Binary search is an efficient algorithm used to find the position of a target value within a sorted array or list. It operates on the principle of "divide and conquer," significantly reducing the search space in each step.`,
+            working: `
+Below is the step-by-step algorithm for Binary Search:
+
+1. Divide the search space into two halves by finding the middle index "mid". 
+2. Compare the middle element of the search space with the key. 
+3. If the key is found at middle element, the process is terminated.
+4. If the key is not found at middle element, choose which half will be used as the next search space.
+    -> If the key is smaller than the middle element, then the left side is used for next search.
+    -> If the key is larger than the middle element, then the right side is used for next search.
+5. This process is continued until the key is found or the total search space is exhausted.`,
+            pseudocode: `
+FUNCTION binarySearch(array, target_value):
+  SET low_index = 0
+  SET high_index = length(array) - 1
+
+  WHILE low_index <= high_index:
+    SET mid_index = low_index + (high_index - low_index) / 2  // Calculate middle index (integer division)
+
+    IF array[mid_index] == target_value:
+      RETURN mid_index  // Target found at mid_index
+    ELSE IF array[mid_index] < target_value:
+      SET low_index = mid_index + 1  // Target is in the right half, discard left
+    ELSE: // array[mid_index] > target_value
+      SET high_index = mid_index - 1  // Target is in the left half, discard right
+
+  RETURN -1  // Target not found in the array
+END FUNCTION`,
+            time: `log(n) -> Best, Avg., Worst`,
+            space: 'O(1)'
+        },
         'bubble-sort': {
             title: 'Bubble Sort',
-            description: `Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in the wrong order. 
-This algorithm is not suitable for large data sets as its average and worst-case time complexity are quite high. We sort the array using multiple passes. After the first pass, 
-the maximum element goes to end (its correct position). Same way, after second pass, the second largest element goes to second last position and so on. In every pass, 
-we process only those elements that have already not moved to correct position. After k passes, the largest k elements must have been moved to the last k positions. 
-In a pass, we consider remaining elements and compare all adjacent and swap if larger element is before a smaller element.If we keep doing this, we get the largest 
-(among the remaining elements) at its correct position.`,
+            description: `Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in the wrong order. This algorithm is not suitable for large data sets as its average and worst-case time complexity are quite high. We sort the array using multiple passes. After the first pass, the maximum element goes to end (its correct position). Same way, after second pass, the second largest element goes to second last position and so on. In every pass, we process only those elements that have already not moved to correct position. After k passes, the largest k elements must have been moved to the last k positions. In a pass, we consider remaining elements and compare all adjacent and swap if larger element is before a smaller element.If we keep doing this, we get the largest (among the remaining elements) at its correct position.`,
             pseudocode: `
 function BUBBLESORT(ARRAY)
 n = length(ARRAY)  // Get the length of the array
@@ -74,9 +126,7 @@ Here's a step-by-step explanation of how merge sort works:
         },
         'quick-sort': {
             title: 'Quick Sort',
-            description: `QuickSort is a sorting algorithm based on the Divide and Conquer that picks an element as a pivot and partitions the given array around the picked pivot by placing the pivot in its correct position in the sorted array.
-
-It works on the principle of divide and conquer, breaking down the problem into smaller sub-problems.`,
+            description: `QuickSort is a sorting algorithm based on the Divide and Conquer that picks an element as a pivot and partitions the given array around the picked pivot by placing the pivot in its correct position in the sorted array.It works on the principle of divide and conquer, breaking down the problem into smaller sub-problems.`,
             pseudocode:`
 // Dividing
 function QuickSort(array, low, high):
@@ -138,22 +188,307 @@ Then one by one delete the root node of the Max-heap and replace it with the las
             time:'O(nlog(n)) -> Best, Avg.,Worst',
             space:'O(1)',
         },
-        'bfs': {
-            title: '',
-            description: ``,
-            pseudocode:``,
-            working:``,
-            time:'',
-            space:'',
+        'inorder-traversal': {
+            title: 'Inorder Traversal',
+            description: `
+Inorder traversal is a depth-first traversal method that follows this sequence:
+
+1. Left subtree is visited first.
+2. Root node is processed next.
+3. Right subtree is visited last.`,
+            pseudocode:`
+PROCEDURE InorderTraversal(node):
+    IF node IS NOT NULL:
+        // Traverse the left subtree
+        InorderTraversal(node.left)
+
+        // Visit the current node (e.g., print its value)
+        VISIT node.value
+
+        // Traverse the right subtree
+        InorderTraversal(node.right)
+END PROCEDURE`,
+            working:`
+1. Visit the left subtree:
+    Recursively traverse the left subtree of the current node, applying the inorder traversal logic (left, root, right) to it.
+2. Visit the root:
+    Once the left subtree is fully traversed, process (e.g., print or store) the value of the current node.
+3. Visit the right subtree:
+    Finally, recursively traverse the right subtree, again applying the inorder traversal logic.`,
+            time:'O(n) -> all',
+            space:'O(1)',
         },
-        'dfs': {
-            title: '',
-            description: ``,
-            pseudocode:``,
-            working:``,
-            time:'',
-            space:'',
+        'preorder-traversal': {
+    title: 'Preorder Traversal',
+    description: `
+Preorder traversal is a depth-first traversal method that visits nodes in this sequence:
+
+1. Root node is processed first.
+2. Left subtree is visited next.
+3. Right subtree is visited last.`,
+    pseudocode:`
+PROCEDURE PreorderTraversal(node):
+    IF node IS NOT NULL:
+        // Visit the current node (e.g., print its value)
+        VISIT node.value
+
+        // Traverse the left subtree
+        PreorderTraversal(node.left)
+
+        // Traverse the right subtree
+        PreorderTraversal(node.right)
+END PROCEDURE`,
+    working:`
+1. Visit the root:
+    Process (e.g., print or store) the value of the current node first.
+2. Visit the left subtree:
+    Recursively traverse the left subtree using the preorder logic (root, left, right).
+3. Visit the right subtree:
+    After finishing the left subtree, recursively traverse the right subtree.`,
+    time: 'O(n) -> all',
+    space: 'O(1)',
+},
+
+        'postorder-traversal': {
+            title: 'Postorder Traversal',
+            description: `
+Postorder traversal is a depth-first traversal method that processes nodes in this order:
+
+    1. Left subtree is visited first.
+    2. Right subtree is visited next.
+    3. Root node is processed last.`,
+            pseudocode:`
+PROCEDURE PostorderTraversal(node):
+    IF node IS NOT NULL:
+        // Traverse the left subtree
+        PostorderTraversal(node.left)
+
+        // Traverse the right subtree
+        PostorderTraversal(node.right)
+
+        // Visit the current node (e.g., print its value)
+        VISIT node.value
+END PROCEDURE`,
+            working:`
+1. Visit the left subtree:
+    Recursively process all nodes in the left subtree using postorder logic (left, right, root).
+2. Visit the right subtree:
+    After the left subtree is completed, recursively process all nodes in the right subtree.
+3. Visit the root:
+    Finally, process the current node after both subtrees have been traversed.`,
+            time: 'O(n) -> all',
+            space: 'O(1)',
         },
+
+        'level-order-traversal': {
+            title: 'Level Order Traversal',
+            description: `
+Level Order Traversal is a breadth-first traversal method that visits nodes level by level from top to bottom, left to right.`,
+            pseudocode:`
+PROCEDURE LevelOrderTraversal(root):
+    IF root IS NULL:
+        RETURN
+
+    INITIALIZE queue
+    ENQUEUE root INTO queue
+
+    WHILE queue IS NOT EMPTY:
+        node = DEQUEUE queue
+        VISIT node.value
+
+        IF node.left IS NOT NULL:
+            ENQUEUE node.left
+
+        IF node.right IS NOT NULL:
+            ENQUEUE node.right
+END PROCEDURE`,
+            working:`
+1. Use a queue data structure:
+    Start by enqueuing the root node.
+2. Visit each node in FIFO order:
+    Dequeue a node, process it, and enqueue its left and right children if they exist.
+3. Traverse level by level:
+    Continue the process until the queue is empty, ensuring nodes are visited level by level from left to right.`,
+            time: 'O(n) -> all',
+            space: 'O(n) -> worst case (full last level)',
+        },
+
+        'binary-tree': {
+            title: 'Binary Tree',
+            description: `A binary tree is a fundamental data structure in computer science that organizes data in a hierarchical fashion. Each element in the tree is called a node, and each node can have at most two children: a left child and a right child. 
+            
+Binary trees use specific terms to describe their structure and components: 
+
+* Root: The top node with no parent.
+* Node: The basic element containing data and pointers to children.
+* Parent: A node with children.
+* Child: A node connected to a parent.
+* Sibling: Nodes sharing a parent.
+* Leaf: A node with no children.
+* Internal Node: A node with at least one child.
+* Depth of a Node: Edges from root to node.
+* Height of a Tree: Edges on the longest path from root to a leaf.
+* Subtree: A part of the tree that is also a binary tree. `,
+            operations:`
+Common operations performed on binary trees including these
+1. insertion
+2. deletion
+3. searching
+4. Traversal methods includes 
+    4.1. In-order
+    4.2. Pre-order
+    4.3. Post-order
+    4.4. Level-order `,
+            types:`
+Various types of binary trees exist, such as 
+1. Full BT
+2. Complete BT
+3. Perfect BT
+4. Balanced BT (AVL Trees and Red-Black Trees)`,
+            advantages:`Binary trees offer advantages such as efficient searching and sorting in balanced trees and a natural 
+representation of hierarchical data. They are also flexible and can be memory-efficient. `,
+            disadvantages:`Drawbacks include poor performance in unbalanced trees and memory overhead from pointers in linked 
+representations. Balancing self-balancing trees can be complex. `,
+            application:`Binary trees are used in numerous applications like file systems, search engines, sorting algorithms,
+and databases. They also appear in data compression and machine learning. `,
+        },
+        'n-array-tree': {
+            title: 'N-ary Tree',
+            description: `An N-ary tree is a generalization of a binary tree where each node can have at most N children instead of just two. It is commonly used to represent hierarchical data such as organizational structures or file systems.
+
+Terms used:
+* Root, Node, Parent, Child, Sibling, Leaf: same as binary tree.
+* Degree of a node: Number of children it has.
+* Arity of the tree: The maximum degree of any node in the tree.`,
+            operations: `
+Common operations include:
+1. Insertion and deletion of nodes
+2. Searching for a value
+3. Pre-order, post-order, and level-order traversals (generalized for N children)
+            `,
+            types: `
+Types of N-ary trees may include:
+1. Ternary Tree (each node has up to 3 children)
+2. Quad Tree (4 children, often used in spatial indexing)
+3. General N-ary Trees`,
+            advantages: `Useful for representing naturally hierarchical data with more than two branches per node, making it more flexible than binary trees.`,
+            disadvantages: `Can be complex to implement and manage, especially in memory-limited environments or when balancing is needed.`,
+            application: `Used in file systems, AI (game trees), decision trees, and representing XML/HTML documents.`,
+        },
+    'perfect-binary-tree': {
+        title: 'Perfect Binary Tree',
+        description: `A perfect binary tree is a binary tree in which all interior nodes have exactly two children and all leaf nodes are at the same level.`,
+        operations: `
+Same as binary tree:
+1. Insertion (usually results in new perfect tree only if done in specific order)
+2. Deletion
+3. Traversals: In-order, Pre-order, Post-order, Level-order`,
+        types: `
+Perfect binary trees are a subset of:
+1. Full binary trees
+2. Complete binary trees`,
+            advantages: `Efficient use of space, predictable structure, optimal search and traversal time.`,
+            disadvantages: `Not flexible; insertion or deletion of a single node breaks perfection.`,
+            application: `Used in applications like heap sort, balanced tree design, and hardware/system modeling.`,
+        },
+
+        'complete-binary-tree': {
+            title: 'Complete Binary Tree',
+            description: `A complete binary tree is a binary tree in which every level, except possibly the last, is completely filled, and all nodes are as far left as possible.`,
+            operations: `
+1. Efficient insertion and deletion at the end
+2. Supports heap operations efficiently
+3. Standard traversals available`,
+            types: `
+Complete binary trees can also be:
+1. Full binary tree (if all levels are filled)
+2. Heap (min-heap or max-heap based on order)`,
+            advantages: `Memory-efficient storage in arrays, ensures O(log n) performance for insert/delete in heaps.`,
+            disadvantages: `Strict structure may require reordering when inserting or deleting nodes.`,
+            application: `Common in heap implementations (priority queues), scheduling systems, and binary heaps.`,
+        },
+
+        'binary-search-tree': {
+            title: 'Binary Search Tree (BST)',
+            description: `A BST is a binary tree where each node's left subtree contains values less than the node, and the right subtree contains values greater than the node.
+
+BST Property:
+* For every node:
+    left.value < node.value < right.value`,
+            operations: `
+1. Insertion (based on value)
+2. Deletion (with 0, 1, or 2 children cases)
+3. Searching
+4. Traversals for sorted data (in-order yields sorted order)`,
+            types: `
+BST variations include:
+1. AVL Tree
+2. Red-Black Tree
+3. Splay Tree`,
+            advantages: `Enables fast lookups, insertions, and deletions in average O(log n) time when balanced.`,
+            disadvantages: `Can degrade to O(n) if not balanced (e.g., inserting sorted data).`,
+            application: `Used in databases, dictionaries, and other structures requiring fast search, insert, and delete operations.`,
+        },
+
+        'avl-tree': {
+            title: 'AVL Tree',
+            description: `An AVL Tree is a self-balancing Binary Search Tree where the difference between heights of left and right subtrees (balance factor) is at most 1 for all nodes.`,
+            operations: `
+1. Insertion with rebalancing (rotations)
+2. Deletion with rebalancing
+3. Searching (O(log n))
+4. Traversals (In-order, Pre-order, etc.)`,
+            types: `
+Rotations used:
+1. Left Rotation
+2. Right Rotation
+3. Left-Right Rotation
+4. Right-Left Rotation`,
+            advantages: `Guarantees O(log n) operations due to strict balancing.`,
+            disadvantages: `Slightly more complex insertion and deletion due to rotations.`,
+            application: `Used in memory-intensive and time-critical applications where consistently fast lookup is important.`,
+        },
+        'red-black-tree': {
+            title: 'Red-Black Tree',
+            description: `A Red-Black Tree is a self-balancing BST where each node has an extra bit for color (red or black), ensuring balanced height via specific rules.
+
+Properties:
+1. Every node is either red or black.
+2. Root is always black.
+3. Red nodes cannot have red children.
+4. Every path from a node to its descendant null nodes must have the same number of black nodes.`,
+            operations: `
+1. Insertion and deletion with color flips and rotations
+2. Searching (O(log n))
+3. Traversals (standard DFS, BFS)`,
+            types: `
+Red-black tree is a type of binary search tree with:
+1. Automatic balancing
+2. Rules-driven color enforcement`,
+            advantages: `Efficiently keeps tree balanced without as many rotations as AVL trees.`,
+            disadvantages: `Slightly more complex logic; may be less strictly balanced than AVL.`,
+            application: `Used in Linux kernel, Java TreeMap, C++ STL maps/sets, and database indices.`,
+        },
+        'full-binary-tree': {
+            title: 'Full Binary Tree',
+            description: `A full binary tree (also known as a proper or strictly binary tree) is a binary tree in which every node has either **0 or 2 children** — never exactly one.
+
+This ensures a strict structure where each internal node always has two children, and all leaf nodes are at the same or different levels.`,
+            operations: `
+Full binary trees support all standard binary tree operations:
+1. Insertion (maintaining full property often requires specific construction)
+2. Deletion
+3. Searching
+4. Traversals: In-order, Pre-order, Post-order, Level-order`,
+            types: `
+Full binary tree is:
+1. A subtype of general binary tree
+2. Often a base for complete or perfect binary trees`,
+            advantages: `Predictable structure, easier to calculate number of nodes (Total nodes = 2L - 1, where L = number of leaf nodes).`,
+            disadvantages: `Not flexible for arbitrary insertions/deletions — any change must preserve the strict "0 or 2 children" rule.`,
+            application: `Used in compiler design (syntax trees), expression trees, and in theoretical computer science for modeling binary logic structures.`,
+},
+
         'dijkstra': {
             title: '',
             description: ``,
@@ -173,18 +508,42 @@ Then one by one delete the root node of the Max-heap and replace it with the las
         <div>
             <h2 style={{ textAlign: 'center' }}>{data.title}</h2>
             <h5>Description</h5>
-            <p>{data.description}</p>
+            <pre style={{ width: '100%', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>{data.description}</pre>
 
             {data.working && (
                 <>
                     <h5>Working</h5>
-                    <pre>{data.working}</pre>
+                    <pre style={{ width: '100%', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>{data.working}</pre>
+                </>
+            )}
+            {data.operations && (
+                <>
+                <h5>Operations</h5>
+                <pre style={{ width: '100%', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>{data.operations}</pre>
+                </>
+            )}
+            {data.types && (
+                <>
+                <h5>Types</h5>
+                <pre style={{ width: '100%', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>{data.types}</pre>
+                </>
+            )}
+            {data.advantages && (
+                <>
+                <h5>Advantages</h5>
+                <pre style={{ width: '100%', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>{data.advantages}</pre>
+                </>
+            )}
+            {data.disadvantages && (
+                <>
+                <h5>Disadvantages</h5>
+                <pre style={{ width: '100%', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>{data.disadvantages}</pre>
                 </>
             )}
             {data.pseudocode && (
                 <>
                     <h5>Pseudocode:</h5>
-                    <pre>{data.pseudocode}</pre>
+                    <pre style={{ width: '100%', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>{data.pseudocode}</pre>
                 </>
             )}
             {data.time && data.space && <h5>Complexities</h5>}
