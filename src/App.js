@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import Navbar from './Components/Navbar';
 import Documentation from './Components/Documentation';
 import Problems from './Components/Problems';
@@ -19,9 +18,10 @@ export default function App() {
         <Routes>
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/documentation/:algo" element={<Documentation />} />
-          <Route path="/problems" element={<Problems />} />
-          <Route path="/visualizers" element={<Visualizers />} />
+          <Route path="/problems/*" element={<Problems />} />
+          <Route path="/Visualizers" element={<Visualizers to=''/>} />
           <Route path="/" element={<h2>Welcome to Algo Visualizer</h2>} />
+          <Route path="*" element={<h2>404 - Page Not Found</h2>} />
         </Routes>
       </div>
     </Router>

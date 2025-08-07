@@ -20,7 +20,7 @@ export default function Navbar() {
                             <Link className="nav-link" style={{color:'black'}} to="/documentation">Documentation</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" style={{color:'black'}} to="/visualizer">Visualizer</Link>
+                            <Link className="nav-link" style={{color:'black'}} to="/Visualizers">Visualizers</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" style={{color:'black'}} to="/problems">Problems</Link>
