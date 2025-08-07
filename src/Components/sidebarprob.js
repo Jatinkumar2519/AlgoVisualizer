@@ -5,10 +5,10 @@ export default function Sidebar() {
   const location = useLocation();
 
   const links = [
-    { name: "DP", path: "/Components/problemList/DP" },
-    { name: "Graph", path: "/Components/problemList/Graph" },
-    { name: "Tree", path: "/Components/problemList/Tree" },
-    { name: "String", path: "/Components/problemList/String" },
+    { name: "DP", path: "/problemList/DP" },
+    { name: "Graph", path: "/problemList/Graph" },
+    { name: "Tree", path: "/problemList/Tree" },
+    { name: "String", path: "/problemList/String" },
   ];
 
   return (

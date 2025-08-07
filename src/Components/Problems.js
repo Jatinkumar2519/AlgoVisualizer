@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Sidebar from "./problemList/sidebar";
+import Sidebar from "./sidebarprob";
 import DP from "./problemList/DP";
 import Graph from "./problemList/Graph";
 import Tree from "./problemList/Tree";
