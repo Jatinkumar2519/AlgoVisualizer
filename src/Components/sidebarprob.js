@@ -18,10 +18,10 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="p-3">
-      <h4>Problems</h4>
+    <div style={{margin:'15px 0px 30px 30px'}} >
+      <h5>Problems</h5>
       <hr style={{ height: "3px", backgroundColor: "#ec7ba2ff", border: "none" }} />
-      <ul style={{ listStyleType: "none", padding: 0 }}>
+      <ul className="nav flex-column" style={{width:'220px'}}>
         {links.map((link) => (
           <li key={link.path} style={{ marginBottom: "10px" }}>
             <Link

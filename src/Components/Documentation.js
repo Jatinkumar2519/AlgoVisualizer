@@ -18,7 +18,7 @@ export default function Documentation() {
                         <AlgoDetails algo={algo} />
                     ) : (
                         <>
-                            <div style={{ textAlign: "center", marginTop: "50px" }}>
+                            <div style={{ textAlign: "center", margin: "50px 50px 50px 50px", background: '#212529', borderRadius:'5px', color:'white',padding:'10px 10px'}}>
                                 <h2>Welcome to the Documentation Section</h2>
                                 <p>
                                     Here you'll find the documentation of every algo.
