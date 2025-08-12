@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-dark text-light text-center p-5" style={{borderRadius: '5px'}}>
+      <section className="bg-dark text-light text-center" style={{borderRadius: '5px',padding:'50px 50px 0px 50px'}}>
         <h1 className="display-4 fw-bold">Learn Competitive Programming</h1>
         <p className="lead">
           Explore interactive algorithm visualizations, curated problem sets,
@@ -20,6 +20,10 @@ export default function Home() {
           <a href="/Visualizers" className="btn btn-warning btn-lg mx-2">
             Visualize Algorithms
           </a>
+        </div>
+        <div style={{margin: '10px', textAlign: 'end',fontFamily:'cursive',fontWeight:'-moz-initial'}}>
+          Created By: Jatin
+          <hr style={{width: '118px',marginLeft:'882px',marginTop:'1px', color:'white'}}/>
         </div>
       </section>
 
@@ -94,7 +98,7 @@ export default function Home() {
       <section className="p-5" style={{ background: '#fdf2f8', border: '0px'}}>
         <h2 className="text-center mb-4">Latest Problems</h2>
         <hr/>
-        <div className="container" >
+        <div className="container" style={{marginBottom:'15px'}}>
           <div className="list-group">
             <a href="/problemList/Graph" className="list-group-item list-group-item-action" style={{ background: '#f7e3eeff', border: '0px',marginTop: '2px'}}>
               Dijkstra’s Algorithm → Solve
@@ -110,7 +114,7 @@ export default function Home() {
       </section>
 
       {/* Footer CTA */}
-      <footer className="bg-dark text-light text-center p-4">
+      <footer className="bg-dark text-light text-center p-4" style={{borderRadius:'5px 5px 0px 0px'}}>
         <h4>Ready to level up your CP skills?</h4>
         <a href="/problemList" className="btn btn-primary mt-3">
           Start Solving Now
