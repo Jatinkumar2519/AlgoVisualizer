@@ -488,16 +488,369 @@ Full binary tree is:
             disadvantages: `Not flexible for arbitrary insertions/deletions — any change must preserve the strict "0 or 2 children" rule.`,
             application: `Used in compiler design (syntax trees), expression trees, and in theoretical computer science for modeling binary logic structures.`,
 },
+    'dfs': {
+        title: 'Depth First Search (DFS)',
+        description: `
+DFS is a graph traversal algorithm that explores as far as possible along a branch before backtracking. 
+It is typically implemented using recursion or an explicit stack.`,
+        pseudocode: `
+PROCEDURE DFS(node, visited):
+    MARK node AS visited
+    VISIT node
+    FOR each neighbor in node.neighbors:
+        IF neighbor NOT visited:
+            DFS(neighbor, visited)
+END PROCEDURE`,
+        working: `
+1. Start from a source node and mark it as visited.
+2. Recursively explore each unvisited neighbor.
+3. Backtrack when no unvisited neighbors remain.
+4. Continue until all reachable nodes are visited.`,
+        time: 'O(V + E) → visit all vertices and edges once',
+        space: 'O(V) → recursion stack or explicit stack',
+    },
 
-        'dijkstra': {
-            title: '',
-            description: ``,
-            pseudocode:``,
-            working:``,
-            time:'',
-            space:'',
-        },
-    };
+    'bfs': {
+        title: 'Breadth First Search (BFS)',
+        description: `
+BFS explores a graph level by level, visiting all neighbors of a node before moving deeper. 
+It uses a queue for tracking the next vertex to explore.`,
+        pseudocode: `
+PROCEDURE BFS(start):
+    INITIALIZE queue
+    MARK start AS visited
+    ENQUEUE start
+    WHILE queue NOT empty:
+        node = DEQUEUE
+        VISIT node
+        FOR each neighbor of node:
+            IF neighbor NOT visited:
+                MARK neighbor AS visited
+                ENQUEUE neighbor
+END PROCEDURE`,
+        working: `
+1. Initialize a queue with the starting node.
+2. Visit and mark nodes as visited when dequeued.
+3. Enqueue unvisited neighbors for future processing.
+4. Continue until all reachable nodes are processed.`,
+        time: 'O(V + E)',
+        space: 'O(V)',
+    },
+
+    'dijkstra': {
+        title: 'Dijkstra’s Algorithm',
+        description: `
+Dijkstra’s algorithm finds the shortest path from a single source to all other vertices in a weighted graph with non-negative edge weights.`,
+        pseudocode: `
+PROCEDURE Dijkstra(graph, source):
+    distance[source] = 0
+    FOR all vertices v ≠ source:
+        distance[v] = ∞
+    INITIALIZE min-priority-queue Q with (source, 0)
+    WHILE Q NOT empty:
+        u = EXTRACT-MIN from Q
+        FOR each neighbor v of u:
+            IF distance[u] + weight(u, v) < distance[v]:
+                distance[v] = distance[u] + weight(u, v)
+                UPDATE Q with (v, distance[v])
+END PROCEDURE`,
+        working: `
+1. Initialize distances to ∞ except source = 0.
+2. Use a priority queue to repeatedly extract the closest unvisited node.
+3. Relax its edges and update neighbor distances.
+4. Continue until all nodes have been processed.`,
+        time: 'O((V + E) log V) with min-heap',
+        space: 'O(V + E)',
+    },
+
+    'bellman-ford': {
+        title: 'Bellman-Ford Algorithm',
+        description: `
+Bellman-Ford computes shortest paths from a single source, even with negative edge weights, and detects negative weight cycles.`,
+        pseudocode: `
+PROCEDURE BellmanFord(graph, source):
+    distance[source] = 0
+    FOR all vertices v ≠ source:
+        distance[v] = ∞
+    FOR i = 1 TO V-1:
+        FOR each edge (u, v) with weight w:
+            IF distance[u] + w < distance[v]:
+                distance[v] = distance[u] + w
+    FOR each edge (u, v) with weight w:
+        IF distance[u] + w < distance[v]:
+            REPORT negative cycle
+END PROCEDURE`,
+        working: `
+1. Initialize distances with ∞ except source = 0.
+2. Relax all edges V-1 times.
+3. Check for changes in a V-th iteration to detect negative cycles.`,
+        time: 'O(V * E)',
+        space: 'O(V)',
+    },
+
+    'floyds-warshall': {
+        title: 'Floyd-Warshall Algorithm',
+        description: `
+Floyd-Warshall computes shortest paths between all pairs of vertices in a weighted graph. Handles negative weights but not negative cycles.`,
+        pseudocode: `
+PROCEDURE FloydWarshall(dist):
+    FOR k = 1 TO V:
+        FOR i = 1 TO V:
+            FOR j = 1 TO V:
+                IF dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+END PROCEDURE`,
+        working: `
+1. Initialize a matrix with direct edge weights or ∞ if no edge.
+2. Iteratively improve paths by checking if a vertex k can be used to shorten the path i→j.
+3. After V iterations, matrix contains shortest distances.`,
+        time: 'O(V³)',
+        space: 'O(V²)',
+    },
+
+    'kruskal-for-mst': {
+        title: 'Kruskal’s Algorithm (MST)',
+        description: `
+Kruskal’s algorithm finds a Minimum Spanning Tree by sorting edges by weight and adding them if they don’t form a cycle (using DSU).`,
+        pseudocode: `
+PROCEDURE Kruskal(edges, V):
+    SORT edges by weight
+    INITIALIZE DSU
+    MST = []
+    FOR each edge (u, v, w) in sorted order:
+        IF FIND(u) ≠ FIND(v):
+            UNION(u, v)
+            ADD edge to MST
+    RETURN MST
+END PROCEDURE`,
+        working: `
+1. Sort all edges by weight.
+2. Use Disjoint Set Union to avoid cycles.
+3. Add edges until V-1 edges are chosen.`,
+        time: 'O(E log E)',
+        space: 'O(V)',
+    },
+
+    'tarjan_s-for-bridges': {
+        title: 'Tarjan’s Algorithm for Bridges',
+        description: `
+Tarjan’s bridge-finding algorithm uses DFS timestamps to find edges whose removal increases the number of connected components.`,
+        pseudocode: `
+PROCEDURE TarjanBridge(u, parent):
+    visited[u] = true
+    disc[u] = low[u] = time++
+    FOR each v in neighbors of u:
+        IF v == parent: CONTINUE
+        IF NOT visited[v]:
+            TarjanBridge(v, u)
+            low[u] = MIN(low[u], low[v])
+            IF low[v] > disc[u]:
+                REPORT (u, v) is a bridge
+        ELSE:
+            low[u] = MIN(low[u], disc[v])
+END PROCEDURE`,
+        working: `
+1. Perform DFS and assign discovery times.
+2. Track the lowest reachable vertex from each node.
+3. If a child’s low value is greater than parent’s discovery time, the edge is a bridge.`,
+        time: 'O(V + E)',
+        space: 'O(V)',
+    },
+
+    'tarjan_s-for-articulation': {
+        title: 'Tarjan’s Algorithm for Articulation Points',
+        description: `
+Finds articulation points (cut vertices) whose removal increases the number of connected components.`,
+        pseudocode: `
+PROCEDURE TarjanAP(u, parent):
+    visited[u] = true
+    disc[u] = low[u] = time++
+    childCount = 0
+    FOR each v in neighbors of u:
+        IF v == parent: CONTINUE
+        IF NOT visited[v]:
+            childCount++
+            TarjanAP(v, u)
+            low[u] = MIN(low[u], low[v])
+            IF parent != NULL AND low[v] >= disc[u]:
+                REPORT u as articulation point
+        ELSE:
+            low[u] = MIN(low[u], disc[v])
+    IF parent == NULL AND childCount > 1:
+        REPORT u as articulation point
+END PROCEDURE`,
+        working: `
+1. Use DFS timestamps and low values.
+2. Root is articulation point if it has >1 DFS child.
+3. Non-root u is articulation point if any child v has low[v] ≥ disc[u].`,
+        time: 'O(V + E)',
+        space: 'O(V)',
+    },
+
+    'kosaraju_s-for-scc': {
+        title: 'Kosaraju’s Algorithm (SCC)',
+        description: `
+Kosaraju’s algorithm finds all Strongly Connected Components (SCCs) in a directed graph using two DFS passes.`,
+        pseudocode: `
+PROCEDURE Kosaraju(G):
+    INITIALIZE empty stack
+    FOR each vertex v in G:
+        IF v NOT visited:
+            DFS1(v, stack)
+    TRANSPOSE G to GT
+    RESET visited
+    WHILE stack NOT empty:
+        v = POP stack
+        IF v NOT visited:
+            DFS2(v) → forms an SCC
+END PROCEDURE`,
+        working: `
+1. First DFS to fill vertices in stack by finishing times.
+2. Reverse graph edges.
+3. DFS in order of decreasing finish times to get SCCs.`,
+        time: 'O(V + E)',
+        space: 'O(V + E)',
+    },
+
+    'graph-coloring': {
+        title: 'Graph Coloring',
+        description: `
+Assign colors to vertices so that no two adjacent vertices share the same color, minimizing the number of colors used.`,
+        pseudocode: `
+PROCEDURE GraphColoring(G):
+    color[] = UNASSIGNED
+    FOR each vertex u in G:
+        availableColors = {all colors}
+        FOR each neighbor v of u:
+            IF color[v] is assigned:
+                REMOVE color[v] from availableColors
+        color[u] = FIRST available color
+END PROCEDURE`,
+        working: `
+1. Process vertices in some order.
+2. Assign the smallest available color not used by adjacent vertices.
+3. Continue until all vertices are colored.`,
+        time: 'O(V²) for adjacency matrix, O(V + E) for adjacency list with efficient color tracking',
+        space: 'O(V)',
+    },
+    'segment-tree': {
+    title: 'Segment Tree',
+    description: `
+A Segment Tree is a binary tree data structure used for storing information about intervals or segments.
+It allows efficient querying and updating of range-based operations such as sum, minimum, or maximum in an array.
+It is especially useful when there are multiple queries and updates on an array.`,
+    pseudocode: `
+PROCEDURE BuildTree(arr, tree, node, start, end):
+    IF start == end:
+        tree[node] = arr[start]
+    ELSE:
+        mid = (start + end) / 2
+        BuildTree(arr, tree, 2*node, start, mid)
+        BuildTree(arr, tree, 2*node+1, mid+1, end)
+        tree[node] = tree[2*node] + tree[2*node+1]   // For sum query
+
+PROCEDURE Query(tree, node, start, end, L, R):
+    IF R < start OR end < L:
+        RETURN 0   // No overlap
+    IF L <= start AND end <= R:
+        RETURN tree[node]  // Complete overlap
+    mid = (start + end) / 2
+    leftQuery = Query(tree, 2*node, start, mid, L, R)
+    rightQuery = Query(tree, 2*node+1, mid+1, end, L, R)
+    RETURN leftQuery + rightQuery
+
+PROCEDURE Update(arr, tree, node, start, end, idx, val):
+    IF start == end:
+        arr[idx] = val
+        tree[node] = val
+    ELSE:
+        mid = (start + end) / 2
+        IF idx <= mid:
+            Update(arr, tree, 2*node, start, mid, idx, val)
+        ELSE:
+            Update(arr, tree, 2*node+1, mid+1, end, idx, val)
+        tree[node] = tree[2*node] + tree[2*node+1]
+    `,
+    working: `
+1.Build Phase: Recursively divide the array into halves until each segment contains one element (leaf node).
+2.Query Phase: For a given range, check if it overlaps with the current node's range.
+   - If no overlap, return 0 (or infinity/min/max depending on problem).
+   - If complete overlap, return the value stored in the current node.
+   - If partial overlap, recursively query left and right children and combine results.
+3.Update Phase: Update the element in the array and reflect the change in all relevant parent nodes.
+    `,
+    time: 'O(N) to build, O(log N) for query and update',
+    space: 'O(4N) to store the segment tree array',
+},
+'trie': {
+    title: 'Trie (Prefix Tree)',
+    description: `
+A tree-like data structure used to store strings, where each node represents a character of the string. 
+Efficient for prefix-based searches, autocomplete systems, and dictionary word lookups.`,
+    pseudocode: `
+PROCEDURE Insert(root, word):
+    node = root
+    FOR each char c in word:
+        IF node.children[c] does not exist:
+            node.children[c] = new Node()
+        node = node.children[c]
+    node.isEndOfWord = TRUE
+
+PROCEDURE Search(root, word):
+    node = root
+    FOR each char c in word:
+        IF node.children[c] does not exist:
+            RETURN FALSE
+        node = node.children[c]
+    RETURN node.isEndOfWord
+
+PROCEDURE StartsWith(root, prefix):
+    node = root
+    FOR each char c in prefix:
+        IF node.children[c] does not exist:
+            RETURN FALSE
+        node = node.children[c]
+    RETURN TRUE`,
+    working: `
+1. Each node contains links to child nodes for each possible character and a flag marking end of word.
+2. Insertion: Traverse character by character, creating nodes as needed.
+3. Search: Traverse down the tree; return true if final node marks end of word.
+4. Prefix search: Similar to search but without requiring end-of-word flag.`,
+    time: 'O(L) per operation, where L is the length of the string/prefix',
+    space: 'O(ALPHABET_SIZE × N × L) in worst case (N = number of words, L = avg length)',
+},
+
+'dsu': {
+    title: 'Disjoint Set Union (Union-Find)',
+    description: `
+A data structure that keeps track of elements split into disjoint sets. 
+Supports two main operations: finding the set a particular element belongs to, and uniting two sets.`,
+    pseudocode: `
+PROCEDURE Find(x):
+    IF parent[x] != x:
+        parent[x] = Find(parent[x])  // Path compression
+    RETURN parent[x]
+
+PROCEDURE Union(x, y):
+    rootX = Find(x)
+    rootY = Find(y)
+    IF rootX != rootY:
+        IF rank[rootX] < rank[rootY]:
+            parent[rootX] = rootY
+        ELSE IF rank[rootX] > rank[rootY]:
+            parent[rootY] = rootX
+        ELSE:
+            parent[rootY] = rootX
+            rank[rootX] += 1`,
+    working: `
+1. Initially, each element is its own parent.
+2. Find(x): Recursively find the root of x, compressing the path to speed future queries.
+3. Union(x, y): Attach the smaller rank tree under the root of the larger rank tree.
+4. Used in Kruskal's algorithm, network connectivity, cycle detection, etc.`,
+    time: 'O(α(N)) per operation (α = inverse Ackermann function, very slow growing)',
+    space: 'O(N) for parent and rank arrays',
+}  
+};
 
     const data = content[algo] || {
         title: 'Not Found',

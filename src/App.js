@@ -12,6 +12,7 @@ import Backtracking from './Components/problemList/Backtracking';
 import Searching_Sorting from './Components/problemList/Searching_Sorting'
 import Sliding_Window from './Components/problemList/Sliding_Window'
 import Segment_Tree from './Components/problemList/Segment_Tree'
+import Home from './Components/Home';
 import {
   BrowserRouter as Router,
   Routes,
@@ -26,7 +27,8 @@ export default function App() {
       <Navbar />
       <div className='container mt-4'>
         <Routes>
-          <Route path="/" element={<h2>Welcome to Algo Visualizer</h2>} />
+          <Route path="/" element={<Home/>} />
+          <Route path="/Home" element={<Home/>} />
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/documentation/:algo" element={<Documentation />} />
           <Route path="/Visualizers" element={<Visualizers />} />

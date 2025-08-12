@@ -17,6 +17,19 @@ export default function Problems() {
       <Sidebar />
       <div style={{ flex: 1, padding: "20px" }}>
         <Routes>
+          <Route
+            path="/"
+            element={
+              <div style={{ textAlign: "center", marginTop: "50px" }}>
+                <h2>Welcome to the Problem Section</h2>
+                <p>
+                  Here you'll find a bunch of problems to practice.
+                  <br />
+                  Select a category from the sidebar to get started!
+                </p>
+              </div>
+            }
+          />
           <Route path="DP" element={<DP />} />
           <Route path="DSU" element={<DSU />} />
           <Route path="Graph" element={<Graph />} />

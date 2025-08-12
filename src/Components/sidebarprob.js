@@ -18,8 +18,9 @@ export default function Sidebar() {
   ];
 
   return (
-    <div style={{ width: "200px", borderRight: "1px solid #ccc", height: "100vh", padding: "10px" }}>
-      <h4>Problem Categories</h4>
+    <div className="p-3">
+      <h4>Problems</h4>
+      <hr style={{ height: "3px", backgroundColor: "#ec7ba2ff", border: "none" }} />
       <ul style={{ listStyleType: "none", padding: 0 }}>
         {links.map((link) => (
           <li key={link.path} style={{ marginBottom: "10px" }}>
