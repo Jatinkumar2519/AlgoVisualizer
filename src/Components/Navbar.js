@@ -53,6 +53,10 @@ export default function Navbar() {
                         ))}
                     </ul>
                 </div>
+                <img
+                src = "/sortchart.gif"
+                alt = "animation"
+                style={{width:'150px',height: '50px',marginLeft:'10px'}}/>
             </div>
         </nav>
     );
