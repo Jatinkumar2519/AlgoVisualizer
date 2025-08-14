@@ -21,7 +21,8 @@ export default function Navbar() {
                     style={{ color: 'black', fontWeight: 700 }}
                     to="/"
                 >
-                    Algo Vizlr
+                    Algo Visualizer
+                    <div style={{fontSize:'10px'}}>Competitive programming Aid</div>
                 </NavLink>
 
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

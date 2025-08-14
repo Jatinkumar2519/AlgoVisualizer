@@ -23,7 +23,7 @@ export default function Problems() {
               <div style={{ textAlign: "center", margin: "30px 50px 0px 70px", background: '#212529', borderRadius:'5px', color:'white',padding:'10px 10px',width:'715px'}}>
                 <h2>Welcome to the Problem Section</h2>
                 <p>
-                  Here you'll find a bunch of problems to practice.
+                  Here you'll find a set of problems to practice.
                   <br />
                   Select a category from the sidebar to get started!
                 </p>
