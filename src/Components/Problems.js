@@ -20,6 +20,7 @@ export default function Problems() {
           <Route
             path="/"
             element={
+              <>
               <div style={{ textAlign: "center", margin: "30px 50px 0px 70px", background: '#212529', borderRadius:'5px', color:'white',padding:'10px 10px',width:'715px'}}>
                 <h2>Welcome to the Problem Section</h2>
                 <p>
@@ -28,6 +29,12 @@ export default function Problems() {
                   Select a category from the sidebar to get started!
                 </p>
               </div>
+              <img
+              src = "/prob.gif"
+              alt = "prob solving"
+              style={{width:'350px',height:'250px',borderRadius:'7px',marginLeft:'250px',marginTop:'10px'}}
+              />
+              </>
             }
           />
           <Route path="DP" element={<DP />} />
