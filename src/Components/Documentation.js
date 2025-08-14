@@ -30,6 +30,7 @@ export default function Documentation() {
                                 src="/document.gif"
                                 alt="prob solving"
                                 style={{ width: '350px', height: '250px', borderRadius: '7px', marginLeft: '230px', marginTop: '10px' }}
+                                className="img-fluid rounded shadow"
                             />
                         </>
                     )}

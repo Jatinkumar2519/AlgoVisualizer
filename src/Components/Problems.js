@@ -32,6 +32,7 @@ export default function Problems() {
               <img
               src = "/prob.gif"
               alt = "prob solving"
+              className="img-fluid rounded shadow"
               style={{width:'350px',height:'250px',borderRadius:'7px',marginLeft:'250px',marginTop:'10px'}}
               />
               </>
